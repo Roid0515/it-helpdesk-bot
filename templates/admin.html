@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 - 요청사항 접수함</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>IT HelpDesk 관리자</h1>
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-item">
+                    <span class="stat-label">전체</span>
+                    <span class="stat-value" id="statTotal">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">대기중</span>
+                    <span class="stat-value pending" id="statPending">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">처리중</span>
+                    <span class="stat-value processing" id="statProcessing">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">완료</span>
+                    <span class="stat-value completed" id="statCompleted">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">오늘</span>
+                    <span class="stat-value" id="statToday">0</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="admin-content">
+            <aside class="sidebar">
+                <h2>일일 접수함</h2>
+                <div class="filter-section">
+                    <label>상태 필터:</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">전체</option>
+                        <option value="pending">대기중</option>
+                        <option value="processing">처리중</option>
+                        <option value="completed">완료</option>
+                    </select>
+                </div>
+                <div class="inbox-list" id="inboxList">
+                    <!-- 일일 접수함 목록이 여기에 표시됩니다 -->
+                </div>
+            </aside>
+            
+            <main class="main-content">
+                <div class="content-header">
+                    <h2 id="contentTitle">요청사항 목록</h2>
+                    <button class="btn-refresh" onclick="loadRequests()">새로고침</button>
+                </div>
+                
+                <div class="requests-list" id="requestsList">
+                    <!-- 요청사항 목록이 여기에 표시됩니다 -->
+                </div>
+            </main>
+        </div>
+        
+        <!-- 요청사항 상세 모달 -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content large">
+                <span class="close" onclick="closeDetailModal()">&times;</span>
+                <h2>요청사항 상세</h2>
+                <div id="requestDetail" class="request-detail">
+                    <!-- 상세 내용이 여기에 표시됩니다 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>
