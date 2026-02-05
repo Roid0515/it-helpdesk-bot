@@ -40,6 +40,10 @@ build/
 dist/
 *.spec
 
+# Installer
+installer/
+*.iss.bak
+
 # Temporary files
 *.tmp
 *.bak

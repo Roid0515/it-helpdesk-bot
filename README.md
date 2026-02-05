@@ -79,6 +79,24 @@ build_exe.bat
 
 자세한 빌드 방법은 `BUILD_INSTRUCTIONS.md` 파일을 참고하세요.
 
+## 설치 프로그램 빌드
+
+### Windows 설치 프로그램 생성
+
+**필요한 도구:**
+- Inno Setup (무료): https://jrsoftware.org/isdl.php
+
+**빌드 방법:**
+```bash
+build_installer.bat
+```
+
+빌드 완료 후 `installer` 폴더에서 `ITHelpDeskBot_Setup.exe` 파일을 확인하세요.
+
+이 설치 프로그램을 배포하여 사용자들이 쉽게 설치할 수 있습니다.
+
+자세한 내용은 `INSTALLER_GUIDE.md` 파일을 참고하세요.
+
 ## 프로젝트 구조
 
 ```
