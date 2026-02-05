@@ -26,7 +26,7 @@ echo 빌드를 시작합니다...
 echo.
 
 REM PyInstaller로 빌드
-pyinstaller --name=ITHelpDeskBot --onefile --windowed --add-data="templates;templates" --add-data="static;static" --hidden-import=flask --hidden-import=flask_sqlalchemy --hidden-import=flask_cors --hidden-import=dotenv --hidden-import=webbrowser --collect-all=flask --collect-all=werkzeug --collect-all=jinja2 app.py
+pyinstaller --name=ITHelpDeskBot --onefile --windowed --add-data="templates;templates" --add-data="static;static" --hidden-import=flask --hidden-import=flask_sqlalchemy --hidden-import=flask_cors --hidden-import=dotenv --hidden-import=webbrowser --hidden-import=pymysql --hidden-import=cryptography --hidden-import=sqlalchemy.dialects.mysql.pymysql --collect-all=flask --collect-all=werkzeug --collect-all=jinja2 --collect-all=pymysql app.py
 
 if errorlevel 1 (
     echo.
