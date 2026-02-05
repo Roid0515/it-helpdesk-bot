@@ -28,15 +28,38 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. 환경 변수 설정
-`.env` 파일을 생성하고 필요한 설정을 추가하세요.
+### 3. MariaDB 설치 및 설정
 
-### 4. 데이터베이스 초기화
+#### MariaDB 설치
+- Windows: https://mariadb.org/download/ 에서 설치 파일 다운로드
+- Linux: `sudo apt install mariadb-server`
+- macOS: `brew install mariadb`
+
+#### 데이터베이스 생성
+```bash
+mysql -u root -p
+```
+```sql
+CREATE DATABASE helpdesk_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+EXIT;
+```
+
+### 4. 환경 변수 설정
+`.env` 파일을 생성하고 `.env.example`을 참고하여 설정하세요:
+
+```env
+DATABASE_URL=mysql+pymysql://root:your_password@localhost:3306/helpdesk_db
+SECRET_KEY=your-secret-key-here
+```
+
+자세한 설정 방법은 `MARIADB_SETUP.md` 파일을 참고하세요.
+
+### 5. 데이터베이스 초기화
 ```bash
 python init_db.py
 ```
 
-### 5. 서버 실행
+### 6. 서버 실행
 ```bash
 python app.py
 ```

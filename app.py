@@ -22,8 +22,13 @@ else:
     # 일반 Python 스크립트로 실행된 경우
     app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///helpdesk.db')
+# MariaDB/MySQL을 기본값으로 사용 (개발 시 SQLite 사용하려면 .env에서 변경)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://root:password@localhost:3306/helpdesk_db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True,  # 연결 유지 확인
+    'pool_recycle': 3600,   # 연결 재사용 시간
+}
 
 # CORS 설정 (프론트엔드와 통신용)
 CORS(app)
