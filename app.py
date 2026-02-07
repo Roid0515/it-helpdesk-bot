@@ -4,26 +4,14 @@ from models import db, HelpDeskRequest, DailyInbox
 from chatbot import ChatBot
 from datetime import datetime, date
 import os
-import sys
-import webbrowser
-from threading import Timer
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# PyInstaller로 빌드된 경우 리소스 경로 처리
-if getattr(sys, 'frozen', False):
-    # 실행 파일로 실행된 경우
-    base_path = sys._MEIPASS
-    template_folder = os.path.join(base_path, 'templates')
-    static_folder = os.path.join(base_path, 'static')
-    app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
-else:
-    # 일반 Python 스크립트로 실행된 경우
-    app = Flask(__name__)
+app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
-# MariaDB/MySQL을 기본값으로 사용 (개발 시 SQLite 사용하려면 .env에서 변경)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://root:password@localhost:3306/helpdesk_db')
+# MariaDB/MySQL 사용 (.env에 DATABASE_URL 설정)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://root:8001@localhost:10004/helpdesk_db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'pool_pre_ping': True,  # 연결 유지 확인
@@ -227,21 +215,7 @@ def get_stats():
         return jsonify({'error': f'통계 조회 중 오류가 발생했습니다: {str(e)}'}), 500
 
 
-def open_browser():
-    """서버 시작 후 브라우저 자동 열기"""
-    url = 'http://localhost:5000'
-    webbrowser.open(url)
-
-
 if __name__ == '__main__':
     with app.app_context():
-        # 데이터베이스 테이블 생성
         db.create_all()
-    
-    # .exe로 실행된 경우에만 브라우저 자동 열기
-    if getattr(sys, 'frozen', False):
-        Timer(1.5, open_browser).start()
-    
-    # 디버그 모드는 .exe 빌드 시 False로 설정
-    debug_mode = not getattr(sys, 'frozen', False)
-    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)

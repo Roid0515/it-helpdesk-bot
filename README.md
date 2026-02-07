@@ -48,7 +48,7 @@ EXIT;
 `.env` 파일을 생성하고 `.env.example`을 참고하여 설정하세요:
 
 ```env
-DATABASE_URL=mysql+pymysql://root:your_password@localhost:3306/helpdesk_db
+DATABASE_URL=mysql+pymysql://root:8001@localhost:10004/helpdesk_db
 SECRET_KEY=your-secret-key-here
 ```
 
@@ -68,35 +68,6 @@ python app.py
 - 사용자 챗봇: http://localhost:5000
 - 관리자 게시판: http://localhost:5000/admin
 
-## 실행 파일(.exe) 빌드
-
-### 간단한 방법 (배치 파일 사용)
-```bash
-build_exe.bat
-```
-
-빌드 완료 후 `dist` 폴더에서 `ITHelpDeskBot.exe` 파일을 확인하세요.
-
-자세한 빌드 방법은 `BUILD_INSTRUCTIONS.md` 파일을 참고하세요.
-
-## 설치 프로그램 빌드
-
-### Windows 설치 프로그램 생성
-
-**필요한 도구:**
-- Inno Setup (무료): https://jrsoftware.org/isdl.php
-
-**빌드 방법:**
-```bash
-build_installer.bat
-```
-
-빌드 완료 후 `installer` 폴더에서 `ITHelpDeskBot_Setup.exe` 파일을 확인하세요.
-
-이 설치 프로그램을 배포하여 사용자들이 쉽게 설치할 수 있습니다.
-
-자세한 내용은 `INSTALLER_GUIDE.md` 파일을 참고하세요.
-
 ## 프로젝트 구조
 
 ```
@@ -106,8 +77,6 @@ IT HelpDesk Bot_260205/
 ├── chatbot.py             # 챗봇 로직
 ├── init_db.py             # 데이터베이스 초기화
 ├── requirements.txt       # Python 패키지 의존성
-├── build_exe.bat          # .exe 빌드 배치 파일
-├── BUILD_INSTRUCTIONS.md  # 빌드 가이드
 ├── .env                   # 환경 변수 (생성 필요)
 ├── static/                # 정적 파일
 │   ├── css/
